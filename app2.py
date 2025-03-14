@@ -36,6 +36,16 @@ conn.commit()
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
+# Banner with Sky Blue Background
+st.markdown(
+    """
+    <div style="background-color:blue;padding:10px;border-radius:10px;text-align:center;">
+        <h1 style="color:white;">🎣 Phishing URL Detector</h1>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 # Sidebar for menu
 st.sidebar.title("Menu")
 if "username" in st.session_state:
@@ -64,7 +74,7 @@ if "username" in st.session_state:
 
 # Authentication system
 def login_page():
-    st.subheader("🔑 Login to Your Account")
+    st.subheader("Login to Your Account")
     username = st.text_input("Username").lower()
     password = st.text_input("Password", type="password")
     if st.button("Login"):
@@ -73,13 +83,13 @@ def login_page():
         if user:
             st.session_state["username"] = username
             st.session_state["credits"] = user[2]
-            st.success("✅ Login Successful!")
+            st.success("Login Successful!")
             st.rerun()
         else:
             st.error("Invalid username or password")
 
 def signup_page():
-    st.subheader("🆕 Create a New Account")
+    st.subheader("Create a New Account")
     new_username = st.text_input("Choose a Username").lower()
     new_password = st.text_input("Choose a Password", type="password")
     if st.button("Sign Up"):
@@ -90,7 +100,7 @@ def signup_page():
             c.execute("INSERT INTO users (username, password, credits) VALUES (?, ?, ?)", 
                       (new_username, hash_password(new_password), 20))
             conn.commit()
-            st.success("✅ Account created successfully! Please login.")
+            st.success("Account created successfully! Please login.")
 
 # Main page logic
 if "username" not in st.session_state:
@@ -98,7 +108,7 @@ if "username" not in st.session_state:
     signup_page()
 else:
     st.subheader("🔍 Check a URL")
-    url_input = st.text_input("Enter a Full URL to Check", placeholder="https://example.com,www.example.com")
+    url_input = st.text_input("Enter a Full URL to check", placeholder="https://example.com,www.example.com")
     if st.button("🔎 Predict"):
         if url_input and st.session_state["credits"] > 0:
             with st.spinner("Analyzing URL... 🧐"):
