@@ -35,8 +35,8 @@ def hash_password(password):
 # Banner with Sky Blue Background
 st.markdown(
     """
-    <div style="background-color:blue;padding:10px;border-radius:10px;text-align:center;">
-        <h1 style="color:white;">🎣 Phishing URL Detector</h1>
+    <div style="background-color:skyblue;padding:10px;border-radius:10px;text-align:center;">
+        <h1 style="color:black;">🎣 Phishing URL Detector</h1>
     </div>
     """,
     unsafe_allow_html=True
@@ -64,7 +64,13 @@ if "username" in st.session_state:
         update_sidebar()
         st.success("💰 10 Credits Added Successfully!")
     
-    if st.sidebar.button("Logout"):
+    if st.sidebar.button("Clear History"):
+        c.execute("DELETE FROM history WHERE username=?", (st.session_state["username"].lower(),))
+        conn.commit()
+        update_sidebar()
+        st.success("History Cleared Successfully!")
+    
+    if st.sidebar.button("Log-out"):
         st.session_state.clear()
         st.rerun()
 
@@ -147,3 +153,22 @@ else:
             st.warning("⚠️ You have no credits left. Please buy more credits.")
         else:
             st.warning("⚠️ Please enter a URL to check.")
+
+# Footer (Centered at the Bottom)
+st.markdown("""
+    <style>
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 46%;
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            color: black;
+        }
+    </style>
+    <div class="footer">
+        <strong>Developed by <a href="https://github.com/MasudBinMazid" target="_blank">Masud</a></strong>
+    </div>
+""", unsafe_allow_html=True)
