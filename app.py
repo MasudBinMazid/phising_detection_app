@@ -158,9 +158,9 @@ else:
 st.markdown("""
     <style>
         .footer {
-            position: fixed;
+            position: flex;
             bottom: 0;
-            width: 46%;
+            width: 100%;
             background-color: #f1f1f1;
             text-align: center;
             padding: 10px;
