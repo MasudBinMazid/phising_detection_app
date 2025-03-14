@@ -40,10 +40,10 @@ def add_bg_from_local(image_file):
 # add_bg_from_local("background.jpg")
 
 # Title
-st.markdown("<h1 style='text-align: center; color: #ffffff;'>🔍 Phishing URL Detector</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #000000;'>🔍 Phishing URL Detector</h1>", unsafe_allow_html=True)
 
 # Input field with styling
-st.markdown("<h3 style='text-align: center; color: #ffffff;'>Enter a URL to check</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: #000000;'>Enter a URL to check</h3>", unsafe_allow_html=True)
 url_input = st.text_input("", placeholder="https://example.com", key="url_input")
 
 # Prediction button with enhanced design
